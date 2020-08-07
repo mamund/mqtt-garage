@@ -1,0 +1,22 @@
+{
+  "name": "mqtt-garage",
+  "version": "1.0.0",
+  "description": "sample garage door simulation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamund/mqtt-garage.git"
+  },
+  "author": "mamund",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mamund/mqtt-garage/issues"
+  },
+  "homepage": "https://github.com/mamund/mqtt-garage#readme",
+  "dependencies": {
+    "mqtt": "^4.1.0"
+  }
+}
