@@ -6,11 +6,13 @@ const client = mqtt.connect('mqtt://broker.hivemq.com');
 var garageState = '';
 var connected = false;
 
+// subscribe on startup
 client.on('connect', function() {
   client.subscribe('garage/connected');
   client.subscribe('garage/state');
 });
 
+// handle incoming
 client.on('message', function(topic, message) {
   switch(topic) {
     case 'garage/connected':
@@ -31,6 +33,21 @@ function handleGarageState(message) {
   garageState = message;
 };
 
+/***********************************
+ * fire up some messages at startup
+ * *********************************/
+
+setTimeout(function() {
+  console.log('open door');
+  openGarageDoor();
+
+}, 5000);
+
+setTimeout(function() {
+  console.log('close door');
+  closeGarageDoor();
+}, 20000);
+
 function openGarageDoor() {
   if(connected && garageState !== 'open') {
     client.publish('garage/open', 'true');
@@ -43,13 +60,4 @@ function closeGarageDoor() {
   }
 };
 
-setTimeout(function() {
-  console.log('open door');
-  openGarageDoor();
 
-}, 5000);
-
-setTimeout(function() {
-  console.log('close door');
-  closeGarageDoor();
-}, 20000);

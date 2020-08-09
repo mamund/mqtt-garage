@@ -10,6 +10,8 @@ const client = mqtt.connect('mqtt://broker.hivemq.com');
 
 var state = "closed";
 
+// subscribe on startup
+// send out connected msg
 client.on('connect', function() {
   client.subscribe('garage/open');
   client.subscribe('garage/close');
@@ -18,6 +20,7 @@ client.on('connect', function() {
   sendStateUpdate();
 });
 
+// handle incoming
 client.on('message', function(topic, message) {
   console.log('received message %s %s', topic, message);
   switch(topic) {
@@ -59,6 +62,7 @@ function sendStateUpdate() {
   client.publish('garage/state', state);
 };
 
+// clean up on exit
 function handleAppExit(options, err) {
   if(err) {
     console.log(err.stack);
@@ -73,6 +77,7 @@ function handleAppExit(options, err) {
   }
 };
 
+// reg for cleanup
 process.on('exit', handleAppExit.bind(null, {cleanup:true}));
 process.on('SIGNINT', handleAppExit.bind(null, {exit:true}));
 process.on('uncaughtException', handleAppExit.bind(null, {exit:true}));

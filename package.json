@@ -2,9 +2,11 @@
   "name": "mqtt-garage",
   "version": "1.0.0",
   "description": "sample garage door simulation",
-  "main": "index.js",
+  "main": "controller.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "garage" : "node garage.js",
+    "controller" : "node controller.js"
   },
   "repository": {
     "type": "git",
